@@ -27,30 +27,30 @@ The workflow is constructed as an explicit, typed LangGraph `StateGraph` compile
 
 ```mermaid
 flowchart TD
-    START([Start]) --> evaluate[evaluate Node]
+    START(["Start"]) --> evaluate["evaluate Node"]
     
-    evaluate --> route_eval{Evaluation Decision}
+    evaluate --> route_eval{"Evaluation Decision"}
     
-    route_eval -->|decision == 'revise' & count < limit| revise[revise Node]
-    route_eval -->|decision == 'revise' & count >= limit| retry_limit[retry_limit Node]
-    route_eval -->|decision == 'human_review'| human_review[human_review Node<br/><i>pauses via interrupt()</i>]
-    route_eval -->|decision == 'reject'| reject[reject Node]
-    route_eval -->|error / invalid| fail[fail Node]
+    route_eval -->|"revise (count < limit)"| revise["revise Node"]
+    route_eval -->|"revise (count >= limit)"| retry_limit["retry_limit Node"]
+    route_eval -->|"human_review"| human_review["human_review Node<br/>(pauses via interrupt)"]
+    route_eval -->|"reject"| reject["reject Node"]
+    route_eval -->|"error / invalid"| fail["fail Node"]
     
-    revise -->|Increment count, update body| evaluate
+    revise -->|"Increment count, update body"| evaluate
     
-    retry_limit --> END_RETRY([END - RETRY_LIMIT_REACHED])
+    retry_limit --> END_RETRY(["END - RETRY_LIMIT_REACHED"])
     
-    human_review -.->|Persisted checkpoint to SQLite| PAUSED([PAUSED AT CHECKPOINT])
-    PAUSED -.->|CLI Resume with Command| human_review
+    human_review -.->|"Save SQLite checkpoint"| PAUSED(["PAUSED AT CHECKPOINT"])
+    PAUSED -.->|"CLI Resume with Command"| human_review
     
-    human_review --> route_review{Review Decision}
-    route_review -->|approve| complete[complete Node]
-    route_review -->|reject| reject[reject Node]
+    human_review --> route_review{"Review Decision"}
+    route_review -->|"approve"| complete["complete Node"]
+    route_review -->|"reject"| reject["reject Node"]
     
-    complete --> END_COMPLETED([END - COMPLETED])
-    reject --> END_REJECTED([END - REJECTED])
-    fail --> END_FAILED([END - FAILED])
+    complete --> END_COMPLETED(["END - COMPLETED"])
+    reject --> END_REJECTED(["END - REJECTED"])
+    fail --> END_FAILED(["END - FAILED"])
 ```
 
 ### Graph Nodes
