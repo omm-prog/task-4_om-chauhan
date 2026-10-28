@@ -1,0 +1,12 @@
+{
+  "id": "content-001",
+  "title": "Advancements in LLM Agent Workflow Persistence and Resilience",
+  "body": "Stateful agentic workflows require durable execution mechanisms. By checkpointing intermediate graph states to a transactional storage layer like SQLite, systems can safely pause at human-in-the-loop review boundaries and resume across process boundaries without rerunning completed work.",
+  "author": "Om Chauhan",
+  "tags": ["workflow", "langgraph", "resilience"],
+  "metadata": {
+    "source": "Atomity Research",
+    "domain": "AI Automation"
+  },
+  "version": 1
+}

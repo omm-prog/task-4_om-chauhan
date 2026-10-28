@@ -1,0 +1,24 @@
+{
+  "immediate_review": {
+    "description": "Evaluator passes content immediately on first evaluation, clearing it for human review.",
+    "initial_decision": "human_review",
+    "expected_revisions": 0
+  },
+  "revise_then_review": {
+    "description": "Evaluator requests revision on attempt 0, then clears for human review on attempt 1.",
+    "initial_decision": "revise",
+    "subsequent_decision": "human_review",
+    "expected_revisions": 1
+  },
+  "retry_limit": {
+    "description": "Evaluator repeatedly requests revision until the maximum revision limit (default 2) is reached.",
+    "initial_decision": "revise",
+    "subsequent_decision": "revise",
+    "expected_revisions": 2,
+    "terminal_state": "retry_limit_reached"
+  },
+  "malformed": {
+    "description": "Evaluator returns a malformed response to test failure detection and graceful error handling.",
+    "terminal_state": "failed"
+  }
+}

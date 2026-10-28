@@ -1,0 +1,11 @@
+{
+  "id": "content-revise-002",
+  "title": "Draft Outline on Event-Driven Review Pipelines",
+  "body": "Initial draft: Review pipelines need bounded retries and audit logging.",
+  "author": "Om Chauhan",
+  "tags": ["draft", "pipeline"],
+  "metadata": {
+    "priority": "high"
+  },
+  "version": 1
+}
